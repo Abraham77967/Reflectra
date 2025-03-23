@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratitude Journal - Express Thankfulness</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="gratitude-page">
+    <!-- Page transition overlay -->
+    <div class="page-transition"></div>
+    
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-heart"></i> Gratitude Journal</h1>
+            <p>Express thankfulness and share positive reflections</p>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-fire-extinguisher"></i>
+                    <span>Burnout Recovery</span>
+                </a>
+                <a href="crave-control.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Crave Control</span>
+                </a>
+                <a href="gratitude.html" class="nav-link active" onclick="startPageTransition(event)">
+                    <i class="fas fa-heart"></i>
+                    <span>Gratitude Journal</span>
+                </a>
+            </nav>
+        </header>
+        
+        <main>
+            <!-- Gratitude Journal -->
+            <section class="feature-section gratitude" id="daily-reflections">
+                <h2><i class="fas fa-feather-alt"></i> Daily Reflections</h2>
+                <p class="section-description">Taking time to reflect on positive experiences and express gratitude can improve your wellbeing.</p>
+                
+                <div class="quote-container">
+                    <p class="journal-quote"><i class="fas fa-quote-left quote-icon"></i> Gratitude turns what we have into enough. <i class="fas fa-quote-right quote-icon"></i></p>
+                </div>
+                
+                <div class="gratitude-container">
+                    <div class="gratitude-prompts">
+                        <h3>Reflection Prompts</h3>
+                        <div class="prompt-cards">
+                            <div class="prompt-card">
+                                <i class="fas fa-star prompt-icon"></i>
+                                <p>What made you smile today?</p>
+                            </div>
+                            <div class="prompt-card">
+                                <i class="fas fa-heart prompt-icon"></i>
+                                <p>Who are you grateful for right now?</p>
+                            </div>
+                            <div class="prompt-card">
+                                <i class="fas fa-laugh prompt-icon"></i>
+                                <p>What small joy did you experience recently?</p>
+                            </div>
+                            <div class="prompt-card">
+                                <i class="fas fa-hand-holding prompt-icon"></i>
+                                <p>What kindness have you received lately?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gratitude-entry-form">
+                        <div class="form-header">
+                            <div class="form-field">
+                                <label for="note-recipient">Recipient's Email (optional):</label>
+                                <input type="email" id="note-recipient" placeholder="someone@example.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="note-subject">Subject:</label>
+                                <input type="text" id="note-subject" placeholder="A note of gratitude">
+                            </div>
+                        </div>
+                        
+                        <textarea id="gratitude-entry" placeholder="Write your reflections or message of gratitude here..."></textarea>
+                        
+                        <div class="form-footer">
+                            <button onclick="saveGratitudeEntry()" class="action-btn gratitude-save">
+                                <i class="fas fa-save"></i> Save Entry
+                            </button>
+                            <button onclick="sendGratitudeEmail()" class="action-btn gratitude-send">
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </button>
+                            <button onclick="clearGratitudeForm()" class="action-btn gratitude-clear">
+                                <i class="fas fa-eraser"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Previously Saved Notes -->
+            <section class="feature-section gratitude" id="gratitude-journal">
+                <h2><i class="fas fa-book-open"></i> Your Gratitude Journal</h2>
+                <p class="section-description">Review your past reflections and moments of thankfulness.</p>
+                
+                <div class="gratitude-entries-container">
+                    <div class="journal-entries-navigation">
+                        <button onclick="showPreviousGratitude()" class="nav-btn" id="prev-gratitude-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="gratitude-counter">No entries yet</span>
+                        <button onclick="showNextGratitude()" class="nav-btn" id="next-gratitude-btn" disabled>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="gratitude-card-container">
+                        <div id="gratitude-entries-display" class="gratitude-card">
+                            <p class="empty-state">Your saved gratitude entries will appear here</p>
+                        </div>
+                    </div>
+                    <div class="gratitude-card-actions">
+                        <button onclick="deleteCurrentGratitude()" class="action-btn" id="delete-gratitude-btn" disabled>
+                            <i class="fas fa-trash"></i> Delete Entry
+                        </button>
+                        <button onclick="resendCurrentGratitude()" class="action-btn gratitude-send" id="resend-gratitude-btn" disabled>
+                            <i class="fas fa-paper-plane"></i> Resend
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Gratitude Visualization -->
+            <section class="feature-section gratitude" id="gratitude-cloud">
+                <h2><i class="fas fa-chart-pie"></i> Gratitude Visualization</h2>
+                <p class="section-description">See the things you're most grateful for represented visually.</p>
+                
+                <div class="visualization-container">
+                    <div class="gratitude-cloud">
+                        <div class="cloud-word">Family</div>
+                        <div class="cloud-word large">Health</div>
+                        <div class="cloud-word medium">Friends</div>
+                        <div class="cloud-word small">Nature</div>
+                        <div class="cloud-word medium">Peace</div>
+                        <div class="cloud-word">Home</div>
+                        <div class="cloud-word small">Music</div>
+                        <div class="cloud-word large">Love</div>
+                    </div>
+                    <p class="cloud-info">Your gratitude cloud will grow as you add more entries.</p>
+                </div>
+            </section>
+        </main>
+        
+    </div>
+    
+    <!-- Quick Navigation Menu -->
+    <div class="quick-nav">
+        <div class="quick-nav-item" data-tooltip="Daily Reflections" onclick="scrollToSection('daily-reflections')">
+            <i class="fas fa-sun"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Your Gratitude Journal" onclick="scrollToSection('gratitude-journal')">
+            <i class="fas fa-book-open"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Gratitude Visualization" onclick="scrollToSection('gratitude-cloud')">
+            <i class="fas fa-cloud"></i>
+        </div>
+    </div>
+    
+    <script src="gratitude.js"></script>
+</body>
+</html> 

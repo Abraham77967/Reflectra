@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnout Recovery Toolkit</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="burnout-recovery">
+    <!-- Page transition overlay -->
+    <div class="page-transition"></div>
+    
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-fire-extinguisher"></i> Burnout Recovery Toolkit</h1>
+            <p class="subtitle">Your personal space for healing and growth</p>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link active" onclick="startPageTransition(event)">
+                    <i class="fas fa-fire-extinguisher"></i>
+                    <span>Burnout Recovery</span>
+                </a>
+                <a href="crave-control.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Crave Control</span>
+                </a>
+                <a href="gratitude.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-heart"></i>
+                    <span>Gratitude Journal</span>
+                </a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Burnout Quiz Section -->
+            <section class="feature-section" id="burnout-quiz">
+                <h2><i class="fas fa-clipboard-list"></i> Burnout Check-in Quiz</h2>
+                <div class="quiz-container">
+                    <div id="quiz-questions"></div>
+                    <div id="quiz-results" class="hidden">
+                        <h3>Your Results</h3>
+                        <div id="result-content"></div>
+                        <button class="action-btn" onclick="restartQuiz()">Take Quiz Again</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercises Section -->
+            <section class="feature-section" id="daily-exercises">
+                <h2><i class="fas fa-spa"></i> Daily Grounding Exercises</h2>
+                <div class="exercises-grid">
+                    <div class="exercise-card breathing">
+                        <h3>Breathing Exercise</h3>
+                        <div class="breathing-container">
+                            <div class="breathing-orb">
+                                <div class="orb-core"></div>
+                                <div class="orb-aura"></div>
+                                <div class="orb-glow"></div>
+                                <div class="orb-halo"></div>
+                                <div class="orb-particles">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="orb-shine"></div>
+                            </div>
+                        </div>
+                        <p>Follow the circle: Breathe in as it expands, out as it contracts</p>
+                        <button class="action-btn" onclick="startBreathingExercise()">Start Exercise</button>
+                    </div>
+                    <div class="exercise-card journal">
+                        <h3>Journaling Prompt</h3>
+                        <p id="journal-prompt">Loading prompt...</p>
+                        <button class="action-btn" onclick="newJournalPrompt()">New Prompt</button>
+                    </div>
+                    <div class="exercise-card goal">
+                        <h3>Mini Goal</h3>
+                        <p id="mini-goal">Loading goal...</p>
+                        <button class="action-btn" onclick="newMiniGoal()">New Goal</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Randomizer Section -->
+            <section class="feature-section" id="self-care-randomizer">
+                <h2><i class="fas fa-random"></i> Self-Care Activity Randomizer</h2>
+                <div class="randomizer-container">
+                    <div class="activity-display">
+                        <p id="current-activity">Click the button to get a random self-care activity!</p>
+                    </div>
+                    <button class="action-btn randomize-btn" onclick="getRandomActivity()">
+                        <i class="fas fa-random"></i>
+                        Get Random Activity
+                    </button>
+                </div>
+            </section>
+
+            <!-- Meditation Section -->
+            <section class="feature-section" id="calming-sounds">
+                <h2><i class="fas fa-headphones"></i> Calming Sounds</h2>
+                <div class="meditation-grid">
+                    <div class="sound-card">
+                        <h3>Rain</h3>
+                        <div class="sound-visualizer">
+                            <div id="rain-circle" class="sound-circle" onclick="toggleSound('rain', event)">
+                                <div class="wave wave1"></div>
+                                <div class="wave wave2"></div>
+                                <div class="wave wave3"></div>
+                                <div class="wave-icon">
+                                    <i class="fas fa-cloud-rain"></i>
+                                </div>
+                                <div class="play-indicator">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sound-card">
+                        <h3>Ocean</h3>
+                        <div class="sound-visualizer">
+                            <div id="ocean-circle" class="sound-circle" onclick="toggleSound('ocean', event)">
+                                <div class="wave wave1"></div>
+                                <div class="wave wave2"></div>
+                                <div class="wave wave3"></div>
+                                <div class="wave-icon">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <div class="play-indicator">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sound-card">
+                        <h3>Forest</h3>
+                        <div class="sound-visualizer">
+                            <div id="forest-circle" class="sound-circle" onclick="toggleSound('forest', event)">
+                                <div class="wave wave1"></div>
+                                <div class="wave wave2"></div>
+                                <div class="wave wave3"></div>
+                                <div class="wave-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <div class="play-indicator">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+    </div>
+    
+    <!-- Quick Navigation Menu -->
+    <div class="quick-nav">
+        <div class="quick-nav-item" data-tooltip="Burnout Check-in Quiz" onclick="scrollToSection('burnout-quiz')">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Daily Grounding Exercises" onclick="scrollToSection('daily-exercises')">
+            <i class="fas fa-spa"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Self-Care Activity Randomizer" onclick="scrollToSection('self-care-randomizer')">
+            <i class="fas fa-random"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Calming Sounds" onclick="scrollToSection('calming-sounds')">
+            <i class="fas fa-headphones"></i>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

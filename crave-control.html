@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crave Control - Manage Unhealthy Behaviors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="crave-control-page">
+    <!-- Page transition overlay -->
+    <div class="page-transition"></div>
+    
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-hand-holding-heart"></i> Crave Control</h1>
+            <p>Tools to manage unhealthy behaviors</p>
+            
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-fire-extinguisher"></i>
+                    <span>Burnout Recovery</span>
+                </a>
+                <a href="crave-control.html" class="nav-link active" onclick="startPageTransition(event)">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Crave Control</span>
+                </a>
+                <a href="gratitude.html" class="nav-link" onclick="startPageTransition(event)">
+                    <i class="fas fa-heart"></i>
+                    <span>Gratitude Journal</span>
+                </a>
+            </nav>
+        </header>
+        
+        <main>
+            <!-- Timer Section -->
+            <section class="feature-section" id="craving-timer">
+                <h2><i class="fas fa-stopwatch"></i> Craving Timer</h2>
+                <p class="section-description">When a craving hits, use this timer to ride it out. Most cravings pass within 5-10 minutes.</p>
+                
+                <div class="timer-container">
+                    <div class="timer-display">00:00</div>
+                    
+                    <div class="timer-options">
+                        <button class="timer-option mild" data-seconds="120" data-tooltip="For mild cravings that are just beginning. Short duration to help you get through the initial urge.">
+                            Mild (2 min)
+                        </button>
+                        <button class="timer-option moderate" data-seconds="300" data-tooltip="For moderate cravings. The standard 5-minute timer - most urges pass within this timeframe.">
+                            Moderate (5 min)
+                        </button>
+                        <button class="timer-option intense" data-seconds="480" data-tooltip="For stronger cravings that need more time to subside. Helps with intense urges that persist longer.">
+                            Intense (8 min)
+                        </button>
+                        <button class="timer-option severe" data-seconds="600" data-tooltip="For severe cravings that are difficult to resist. Extended timer for the most challenging urges.">
+                            Severe (10 min)
+                        </button>
+                    </div>
+                    
+                    <div class="timer-control-container">
+                        <button id="timer-control" class="action-btn">
+                            <i class="fas fa-play"></i> Start Timer
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-markers">
+                        <span class="progress-marker start">Start</span>
+                        <span class="progress-marker peak">Peak</span>
+                        <span class="progress-marker end">End</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Journal Section -->
+            <section class="feature-section" id="journal-reflections">
+                <h2><i class="fas fa-book-open"></i> Journal Reflections</h2>
+                <p class="section-description">Reflect on your cravings and strategies that help. Your entries are saved for future reference.</p>
+                
+                <div class="journal-container">
+                    <div class="journal-prompts">
+                        <h3>Journal</h3>
+                        <div class="quote-container">
+                            <p class="journal-quote"><i class="fas fa-quote-left quote-icon"></i> Writing down your feelings can help you understand and manage them better. <i class="fas fa-quote-right quote-icon"></i></p>
+                        </div>
+                        <ul>
+                            <li>What triggered this craving?</li>
+                            <li>How does your body feel right now?</li>
+                            <li>What emotions are you experiencing?</li>
+                            <li>What would happen if you gave in? How would you feel after?</li>
+                            <li>What could you do instead that aligns with your goals?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="journal-entry-form">
+                        <textarea id="journal-entry" placeholder="Write your thoughts here..."></textarea>
+                        
+                        <div class="journal-form-actions">
+                            <button onclick="saveJournalEntry()" class="action-btn mild">
+                                <i class="fas fa-save"></i> Save Entry
+                            </button>
+                            <button onclick="clearJournalForm()" class="action-btn">
+                                <i class="fas fa-eraser"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="journal-entries-container">
+                        <h3>Your Journal</h3>
+                        <div class="journal-entries-navigation">
+                            <button onclick="showPreviousEntry()" class="nav-btn" id="prev-entry-btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span id="entry-counter">No entries yet</span>
+                            <button onclick="showNextEntry()" class="nav-btn" id="next-entry-btn" disabled>
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="journal-card-container">
+                            <div id="journal-entries-display" class="journal-card">
+                                <p class="empty-state">Your saved journal entries will appear here</p>
+                            </div>
+                        </div>
+                        <div class="journal-card-actions">
+                            <button onclick="deleteCurrentEntry()" class="action-btn" id="delete-entry-btn" disabled>
+                                <i class="fas fa-trash"></i> Delete Entry
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Distraction Section -->
+            <section class="feature-section" id="distraction-tool">
+                <h2><i class="fas fa-random"></i> Distraction Tool</h2>
+                <p class="section-description">Need to redirect your focus? Here's a random activity to help distract your mind:</p>
+                
+                <div class="distraction-container">
+                    <p id="current-distraction">Click the button to get a distraction activity</p>
+                    
+                    <button onclick="getRandomDistraction()" class="action-btn moderate">
+                        <i class="fas fa-dice"></i> Get New Distraction
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Progress Tracker -->
+            <section class="feature-section" id="progress-tracker">
+                <h2><i class="fas fa-chart-line"></i> Progress Tracker</h2>
+                <p class="section-description">Track your journey and see your progress in overcoming cravings.</p>
+                
+                <div class="progress-tracker">
+                    <div class="time-counter">
+                        <div class="time-box">
+                            <span id="days">0</span>
+                            <span class="time-label">days</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="hours">0</span>
+                            <span class="time-label">hours</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="minutes-progress">0</span>
+                            <span class="time-label">minutes</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="resetProgress()" class="action-btn intense">
+                        <i class="fas fa-redo"></i> Reset Progress
+                    </button>
+                </div>
+            </section>
+        </main>
+        
+    </div>
+    
+    <!-- Quick Navigation Menu -->
+    <div class="quick-nav">
+        <div class="quick-nav-item" data-tooltip="Craving Timer" onclick="scrollToSection('craving-timer')">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Journal Reflections" onclick="scrollToSection('journal-reflections')">
+            <i class="fas fa-journal-whills"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Distraction Tool" onclick="scrollToSection('distraction-tool')">
+            <i class="fas fa-puzzle-piece"></i>
+        </div>
+        <div class="quick-nav-item" data-tooltip="Progress Tracker" onclick="scrollToSection('progress-tracker')">
+            <i class="fas fa-chart-line"></i>
+        </div>
+    </div>
+    
+    <script src="crave-control.js"></script>
+</body>
+</html> 
